@@ -15,15 +15,15 @@ namespace PatientService.Controllers
             _patientService = patientService;
         }
 
-
-        [HttpGet]
+        [HttpGet("GetPatients")]
         public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
         {
             var patients = await _patientService.GetAllPatientsAsync();
             return Ok(patients);
         }
 
-        [HttpGet("{id}")]
+       
+        [HttpGet("GetPatients/{id}")]
         public async Task<ActionResult<Patient>> GetPatient(int id)
         {
             var patient = await _patientService.GetPatientByIdAsync(id);
@@ -35,14 +35,14 @@ namespace PatientService.Controllers
             return Ok(patient);
         }
 
-        [HttpPost]
+        [HttpPost("AddPatient")]
         public async Task<ActionResult<Patient>> AddPatient([FromForm] Patient patient)
         {
             await _patientService.AddPatientAsync(patient);
             return CreatedAtAction(nameof(GetPatient), new { id = patient.Id }, patient);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdatePatient/{id}")]
         public async Task<IActionResult> UpdatePatient(int id, [FromForm] Patient patient)
         {
             if (id != patient.Id)
@@ -54,7 +54,7 @@ namespace PatientService.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeletePatient/{id}")]
         public async Task<IActionResult> DeletePatient(int id)
         {
             await _patientService.DeletePatientAsync(id);

@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using PatientService.Data;
 using PatientService.Repositories;
+using PatientService.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(); 
@@ -11,6 +13,7 @@ builder.Services.AddCors();
 
 builder.Services.AddControllers();
 builder.Services.AddTransient<IPatientRepository, PatientRepository>();
+builder.Services.AddTransient<IPatientService, PatientService.Services.PatientService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
