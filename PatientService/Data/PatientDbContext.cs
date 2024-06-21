@@ -16,5 +16,17 @@ namespace PatientService.Data
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<MedicalHistory> MedicalHistories { get; set; }
+        public DbSet<Bed> Beds { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Patient>()
+                .HasOne(p => p.Bed)
+                .WithMany(b => b.Patients)
+                .HasForeignKey(p => p.BedId)
+                .OnDelete(DeleteBehavior.SetNull); // Set null when bed is deleted
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

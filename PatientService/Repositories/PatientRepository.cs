@@ -39,7 +39,7 @@ namespace PatientService.Repositories
 
         public async Task AddPatientAsync(Patient patient)
         {
-            _context.Patients.Add(patient);
+            await _context.Patients.AddAsync(patient);
             await _context.SaveChangesAsync();
         }
 

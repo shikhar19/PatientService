@@ -18,5 +18,8 @@
         // Appointments and Medical History
         public List<Appointment> Appointments { get; set; }
         public List<MedicalHistory> MedicalHistories { get; set; }
+        // Foreign key for Bed
+        public int? BedId { get; set; }
+        public Bed Bed { get; set; } // Navigation property
     }
 }
