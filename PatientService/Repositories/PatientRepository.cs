@@ -58,5 +58,14 @@ namespace PatientService.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<Patient> GetPatientByEmailAsync(string email)
+        {
+            var patient = await _context.Patients
+                .Include(p => p.MedicalHistories)
+                .FirstOrDefaultAsync(p => p.Email == email);
+
+            return patient;
+        }
     }
 }

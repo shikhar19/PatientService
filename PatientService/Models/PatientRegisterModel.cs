@@ -2,10 +2,8 @@
 
 namespace PatientService.Models
 {
-    public class Patient
+    public class PatientRegisterModel
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         [StringLength(100)]
         public string FirstName { get; set; }
@@ -16,9 +14,11 @@ namespace PatientService.Models
 
         [Required]
         public DateTime DateOfBirth { get; set; }
+
+        public string PhotoPath { get; set; }
+
         [Required]
         public string Gender { get; set; }
-        public string PhotoPath { get; set; }
         [Required]
         public string ContactDetails { get; set; }
         [Required]
@@ -32,12 +32,8 @@ namespace PatientService.Models
         [StringLength(100)]
         public string Password { get; set; }
 
+        public int? BedId { get; set; }
 
-        // Appointments and Medical History
-        public List<Appointment> Appointments { get; set; }
-        public List<MedicalHistory> MedicalHistories { get; set; }
-        // Foreign key for Bed
-        public int? BedId { get; set; } // Optional bed assignment
-        public Bed Bed { get; set; } // Navigation property
+        public List<MedicalHistoryModel> MedicalHistories { get; set; }
     }
 }

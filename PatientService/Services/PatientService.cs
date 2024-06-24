@@ -35,5 +35,10 @@ namespace PatientService.Services
         {
             await _patientRepository.DeletePatientAsync(id);
         }
+
+        public async Task<Patient> GetPatientByEmailAsync(string email)
+        {
+            return await _patientRepository.GetPatientByEmailAsync(email);
+        }
     }
 }

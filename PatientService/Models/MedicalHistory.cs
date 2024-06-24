@@ -1,13 +1,24 @@
-﻿namespace PatientService.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PatientService.Models
 {
     public class MedicalHistory
     {
-        public int Id { get; set; }
-        public string Diagnosis { get; set; }
-        public string Treatments { get; set; }
-        public string TestResults { get; set; }
-        public string Immunizations { get; set; }
+        [Key]
+        public int MedicalHistoryId { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        [Required]
+        public DateTime Date { get; set; }
+
+        // Foreign key
         public int PatientId { get; set; }
+
+        // Navigation property
+        [ForeignKey("PatientId")]
         public Patient Patient { get; set; }
     }
 }

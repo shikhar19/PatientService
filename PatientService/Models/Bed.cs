@@ -1,4 +1,6 @@
-﻿namespace PatientService.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PatientService.Models
 {
     public class Bed
     {
@@ -7,7 +9,11 @@
         public bool IsOccupied { get; set; }
         public string? BedType { get; set; }
 
-        // Navigation property for Patients assigned to this bed
-        public ICollection<Patient> Patients { get; set; }
+        // Foreign key to Patient
+        public int? PatientId { get; set; }
+
+        // Navigation property for Patient
+        [ForeignKey("PatientId")]
+        public Patient Patient { get; set; }
     }
 }

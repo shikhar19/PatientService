@@ -20,11 +20,23 @@ namespace PatientService.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configure one-to-many relationship between Patient and MedicalHistory
+            modelBuilder.Entity<MedicalHistory>()
+                .HasOne(m => m.Patient)
+                .WithMany(p => p.MedicalHistories)
+                .HasForeignKey(m => m.PatientId);
+
+            // Configure one-to-many relationship between Patient and Appointment
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Patient)
+                .WithMany(p => p.Appointments)
+                .HasForeignKey(a => a.PatientId);
+
+            // Configure one-to-one relationship between Patient and Bed
             modelBuilder.Entity<Patient>()
                 .HasOne(p => p.Bed)
-                .WithMany(b => b.Patients)
-                .HasForeignKey(p => p.BedId)
-                .OnDelete(DeleteBehavior.SetNull); // Set null when bed is deleted
+                .WithOne(b => b.Patient)
+                .HasForeignKey<Bed>(b => b.PatientId);
 
             base.OnModelCreating(modelBuilder);
         }
